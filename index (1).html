@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jiya Jaiswal — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D1117;
+    --surface:#161B22;
+    --surface-2:#1C232D;
+    --border:#26303B;
+    --text:#E6EDF3;
+    --muted:#8B949E;
+    --accent:#5EEAD4;
+    --accent-dim:#2A6F66;
+    --violet:#A78BFA;
+    --display:'Space Grotesk', sans-serif;
+    --body:'Inter', sans-serif;
+    --mono:'JetBrains Mono', monospace;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--body);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  body::before{
+    content:'';
+    position:fixed;
+    top:0; left:0; right:0; height:100vh;
+    background:
+      radial-gradient(circle at 15% 10%, rgba(94,234,212,0.07), transparent 40%),
+      radial-gradient(circle at 85% 0%, rgba(167,139,250,0.06), transparent 45%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  a{color:inherit; text-decoration:none;}
+
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:100;
+    background:rgba(13,17,23,0.75);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-inner{
+    max-width:1080px;
+    margin:0 auto;
+    padding:18px 32px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .logo{
+    font-family:var(--mono);
+    font-weight:600;
+    font-size:15px;
+    color:var(--accent);
+    letter-spacing:0.5px;
+  }
+  .logo span{color:var(--muted);}
+  .nav-links{
+    display:flex;
+    gap:32px;
+    list-style:none;
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--muted);
+  }
+  .nav-links a{
+    transition:color 0.2s ease;
+    position:relative;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible{color:var(--text);}
+  .nav-links a.active{color:var(--accent);}
+  .nav-links a::before{content:'';}
+  .nav-toggle{display:none;}
+
+  @media (max-width:700px){
+    .nav-links{
+      position:fixed;
+      top:60px; right:0;
+      flex-direction:column;
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:10px 0 0 10px;
+      padding:20px 28px;
+      gap:18px;
+      transform:translateX(110%);
+      transition:transform 0.3s ease;
+    }
+    .nav-links.open{transform:translateX(0);}
+    .nav-toggle{
+      display:block;
+      background:none; border:none;
+      color:var(--text);
+      font-family:var(--mono);
+      font-size:20px;
+      cursor:pointer;
+    }
+  }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding-top:90px;
+    position:relative;
+    z-index:1;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:24px;
+    align-items:center;
+    width:100%;
+    max-width:680px;
+  }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--accent);
+    letter-spacing:1px;
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:8px; height:8px;
+    border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 0 0 rgba(94,234,212,0.6);
+    animation:pulse 2s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(94,234,212,0.5);}
+    70%{box-shadow:0 0 0 8px rgba(94,234,212,0);}
+    100%{box-shadow:0 0 0 0 rgba(94,234,212,0);}
+  }
+
+  h1.name{
+    font-family:var(--display);
+    font-size:clamp(40px, 6vw, 64px);
+    font-weight:700;
+    line-height:1.05;
+    margin-bottom:18px;
+    letter-spacing:-1px;
+  }
+  h1.name .accent{color:var(--accent);}
+
+  .tagline{
+    font-size:18px;
+    color:var(--muted);
+    max-width:480px;
+    margin:0 auto 32px;
+  }
+  .tagline strong{color:var(--text); font-weight:500;}
+
+  .hero-ctas{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .btn{
+    font-family:var(--mono);
+    font-size:14px;
+    padding:13px 24px;
+    border-radius:8px;
+    border:1px solid var(--border);
+    transition:all 0.25s ease;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .btn-primary{
+    background:var(--accent);
+    color:#06302B;
+    border-color:var(--accent);
+    font-weight:600;
+  }
+  .btn-primary:hover, .btn-primary:focus-visible{
+    background:#7FF2DE;
+    transform:translateY(-2px);
+  }
+  .btn-ghost{
+    color:var(--text);
+    background:transparent;
+  }
+  .btn-ghost:hover, .btn-ghost:focus-visible{
+    border-color:var(--accent);
+    color:var(--accent);
+  }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{
+    padding:110px 0;
+    position:relative;
+    z-index:1;
+    scroll-margin-top:80px;
+  }
+  .section-head{
+    margin-bottom:48px;
+  }
+  .section-num{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--accent);
+    margin-bottom:8px;
+    letter-spacing:1px;
+  }
+  h2.section-title{
+    font-family:var(--display);
+    font-size:clamp(28px, 4vw, 38px);
+    font-weight:600;
+    letter-spacing:-0.5px;
+  }
+
+  .reveal{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible{opacity:1; transform:translateY(0);}
+
+  /* ---------- ABOUT ---------- */
+  .about-content{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+    align-items:start;
+  }
+  @media (max-width:780px){.about-content{grid-template-columns:1fr;}}
+  .about-text p{
+    color:var(--muted);
+    font-size:16.5px;
+    margin-bottom:18px;
+  }
+  .about-text strong{color:var(--text); font-weight:600;}
+  .about-text .highlight{color:var(--accent);}
+
+  .info-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:28px;
+  }
+  .info-row{
+    display:flex;
+    justify-content:space-between;
+    padding:13px 0;
+    border-bottom:1px solid var(--border);
+    font-size:14.5px;
+  }
+  .info-row:last-child{border-bottom:none;}
+  .info-label{color:var(--muted); font-family:var(--mono); font-size:13px;}
+  .info-value{color:var(--text); font-weight:500; text-align:right;}
+  .info-value a{color:var(--accent); transition:opacity 0.2s;}
+  .info-value a:hover{opacity:0.75;}
+
+  /* ---------- EDUCATION (timeline) ---------- */
+  .timeline{
+    position:relative;
+    padding-left:32px;
+    border-left:2px solid var(--border);
+  }
+  .tl-item{
+    position:relative;
+    padding-bottom:40px;
+  }
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:'';
+    position:absolute;
+    left:-39px;
+    top:4px;
+    width:14px; height:14px;
+    border-radius:50%;
+    background:var(--bg);
+    border:2px solid var(--accent);
+  }
+  .tl-period{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--accent);
+    margin-bottom:6px;
+  }
+  .tl-title{
+    font-family:var(--display);
+    font-size:19px;
+    font-weight:600;
+    margin-bottom:4px;
+  }
+  .tl-sub{color:var(--muted); font-size:14.5px;}
+  .tl-score{
+    display:inline-block;
+    margin-top:8px;
+    font-family:var(--mono);
+    font-size:12.5px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    color:var(--violet);
+    padding:4px 10px;
+    border-radius:6px;
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:20px;
+  }
+  .skill-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:24px;
+    transition:border-color 0.25s ease, transform 0.25s ease;
+  }
+  .skill-card:hover{border-color:var(--accent-dim); transform:translateY(-3px);}
+  .skill-cat{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--muted);
+    letter-spacing:0.5px;
+    margin-bottom:14px;
+  }
+  .tag-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .tag{
+    font-family:var(--mono);
+    font-size:13px;
+    padding:6px 12px;
+    border-radius:6px;
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    color:var(--text);
+  }
+
+  /* ---------- ACHIEVEMENTS ---------- */
+  .achieve-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    gap:20px;
+  }
+  .achieve-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:26px;
+    display:flex;
+    gap:18px;
+    align-items:flex-start;
+    transition:transform 0.25s ease, border-color 0.25s ease;
+  }
+  .achieve-card:hover{transform:translateY(-3px); border-color:var(--accent-dim);}
+  .achieve-icon{
+    flex-shrink:0;
+    width:42px; height:42px;
+    border-radius:9px;
+    background:rgba(94,234,212,0.1);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--accent);
+    font-family:var(--mono);
+    font-weight:600;
+    font-size:15px;
+  }
+  .achieve-title{
+    font-family:var(--display);
+    font-size:17px;
+    font-weight:600;
+    margin-bottom:5px;
+  }
+  .achieve-desc{color:var(--muted); font-size:14px;}
+
+  /* ---------- CONTACT ---------- */
+  .contact-box{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:56px 48px;
+    text-align:center;
+  }
+  .contact-box h2{
+    font-family:var(--display);
+    font-size:clamp(26px, 4vw, 36px);
+    font-weight:600;
+    margin-bottom:14px;
+  }
+  .contact-box .accent{color:var(--accent);}
+  .contact-box p{color:var(--muted); margin-bottom:32px; font-size:16px;}
+  .contact-links{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+
+  footer{
+    text-align:center;
+    padding:36px 0 50px;
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--muted);
+    position:relative;
+    z-index:1;
+  }
+
+  ::selection{background:var(--accent); color:#06302B;}
+
+  :focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">jiya<span>.dev</span></div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">about</a></li>
+      <li><a href="#education">education</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#achievements">achievements</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">AVAILABLE FOR INTERNSHIPS &amp; PLACEMENTS</div>
+      <h1 class="name">Jiya Jaiswal<span class="accent">.</span></h1>
+      <p class="tagline">
+        <strong>B.Tech CS student</strong> at KIET Group of Institutions, building toward
+        a career in <strong>app development</strong> — one data structure at a time.
+      </p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary">Get in touch →</a>
+        <a href="#skills" class="btn btn-ghost">View skills</a>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-num">01 / About</div>
+      <h2 class="section-title">Who I am</h2>
+    </div>
+    <div class="about-content reveal">
+      <div class="about-text">
+        <p>
+          I'm a <strong>second-year B.Tech Computer Science</strong> student at KIET Group of
+          Institutions, Ghaziabad, currently sharpening my fundamentals in
+          <span class="highlight">Data Structures &amp; Algorithms</span> while exploring
+          <strong>app development</strong> as my primary area of interest.
+        </p>
+        <p>
+          I enjoy problem-solving in C++ and Python, and I'm steadily building toward becoming
+          an <strong>app developer</strong> — learning the languages, tools, and systems thinking
+          that go into shipping real software. I'm currently preparing for internships and
+          placements, and looking for opportunities to apply what I'm learning to real-world problems.
+        </p>
+      </div>
+      <div class="info-card">
+        <div class="info-row"><span class="info-label">LOCATION</span><span class="info-value">Delhi NCR, India</span></div>
+        <div class="info-row"><span class="info-label">COLLEGE</span><span class="info-value">KIET Group of Institutions</span></div>
+        <div class="info-row"><span class="info-label">YEAR</span><span class="info-value">2nd Year, B.Tech CS</span></div>
+        <div class="info-row"><span class="info-label">EMAIL</span><span class="info-value"><a href="mailto:jiya.25001126@kiet.edu">jiya.25001126@kiet.edu</a></span></div>
+        <div class="info-row"><span class="info-label">GITHUB</span><span class="info-value"><a href="https://github.com/jiya25001126" target="_blank" rel="noopener">jiya25001126</a></span></div>
+        <div class="info-row"><span class="info-label">LINKEDIN</span><span class="info-value"><a href="https://www.linkedin.com/in/jiya-jaiswal-772b69381/" target="_blank" rel="noopener">jiya-jaiswal</a></span></div>
+        <div class="info-row"><span class="info-label">LEETCODE</span><span class="info-value"><a href="https://leetcode.com/u/Jiya_Jaiswal/" target="_blank" rel="noopener">Jiya_Jaiswal</a></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-num">02 / Education</div>
+      <h2 class="section-title">Academic background</h2>
+    </div>
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-period">2024 — 2028 (Expected)</div>
+        <div class="tl-title">B.Tech, Computer Science</div>
+        <div class="tl-sub">KIET Group of Institutions, Ghaziabad</div>
+        <div class="tl-score">Currently in 2nd year</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-period">2023 — 2024</div>
+        <div class="tl-title">Class XII</div>
+        <div class="tl-sub">Senior Secondary</div>
+        <div class="tl-score">85%</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-period">2021 — 2022</div>
+        <div class="tl-title">Class X</div>
+        <div class="tl-sub">Secondary School</div>
+        <div class="tl-score">88.2%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-num">03 / Skills</div>
+      <h2 class="section-title">What I work with</h2>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-card">
+        <div class="skill-cat">LANGUAGES</div>
+        <div class="tag-row">
+          <span class="tag">C++</span>
+          <span class="tag">Python</span>
+          <span class="tag">C</span>
+          <span class="tag">Kotlin</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">WEB</div>
+        <div class="tag-row">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">CORE STRENGTH</div>
+        <div class="tag-row">
+          <span class="tag">Data Structures &amp; Algorithms</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">CURRENTLY LEARNING</div>
+        <div class="tag-row">
+          <span class="tag">App Development</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="achievements">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-num">04 / Achievements</div>
+      <h2 class="section-title">Certifications &amp; events</h2>
+    </div>
+    <div class="achieve-grid reveal">
+      <div class="achieve-card">
+        <div class="achieve-icon">✓</div>
+        <div>
+          <div class="achieve-title">AWS Cloud Practitioner — Certified</div>
+          <div class="achieve-desc">Earned certification validating foundational cloud knowledge on AWS.</div>
+        </div>
+      </div>
+      <div class="achieve-card">
+        <div class="achieve-icon">◆</div>
+        <div>
+          <div class="achieve-title">Innotech '25</div>
+          <div class="achieve-desc">Participated in the college-level technical event at KIET Group of Institutions.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-box reveal">
+      <h2>Let's build something<span class="accent">.</span></h2>
+      <p>Open to internship and placement opportunities in software &amp; app development.</p>
+      <div class="contact-links">
+        <a href="mailto:jiya.25001126@kiet.edu" class="btn btn-primary">Email me</a>
+        <a href="https://www.linkedin.com/in/jiya-jaiswal-772b69381/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
+        <a href="https://github.com/jiya25001126" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+        <a href="https://leetcode.com/u/Jiya_Jaiswal/" target="_blank" rel="noopener" class="btn btn-ghost">LeetCode</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Designed &amp; built by Jiya Jaiswal — © 2026
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduceMotion){
+    revealEls.forEach(el => el.classList.add('visible'));
+  } else {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.15});
+    revealEls.forEach(el => obs.observe(el));
+  }
+
+  // Active tab highlighting (scroll-spy)
+  const sections = document.querySelectorAll('section[id]');
+  const navAnchors = document.querySelectorAll('.nav-links a');
+
+  function setActiveLink(id){
+    navAnchors.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+    });
+  }
+
+  if(sections.length && 'IntersectionObserver' in window){
+    const spyObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          setActiveLink(entry.target.id);
+        }
+      });
+    }, {rootMargin: '-40% 0px -55% 0px', threshold: 0});
+    sections.forEach(sec => spyObs.observe(sec));
+  }
+
+  navAnchors.forEach(a => {
+    a.addEventListener('click', () => setActiveLink(a.getAttribute('href').slice(1)));
+  });
+
+</script>
+
+</body>
+</html>
